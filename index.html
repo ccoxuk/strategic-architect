@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Professional strategic planning framework by NavigateGov - Transform ideas into actionable strategic plans">
     <meta name="author" content="NavigateGov Ltd">
-    <title>Strategic Architect™ by NavigateGov® | Professional Planning Framework</title>
+<title>Strategic Architect by NavigateGov.uk | Professional Planning Framework</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1425,6 +1425,20 @@
             .feature-grid {
                 grid-template-columns: 1fr;
             }
+            /* On mobile, ensure the page scrolls and content doesn't overlap the footer */
+            body {
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .legal-footer {
+                position: static;
+                margin-top: var(--space-lg);
+            }
+
+            .cta-group {
+                margin-bottom: var(--space-2xl);
+            }
 
             .summary-panel {
                 width: 100%;
@@ -1482,9 +1496,9 @@
             <div class="logo-icon">S</div>
         </div>
 
-        <h1 class="hero-title">Strategic <span class="accent">Architect</span>™</h1>
+        <h1 class="hero-title">Strategic <span class="accent">Architect</span></h1>
         <p class="hero-subtitle">Transform Ideas Into Actionable Strategic Plans</p>
-        <p class="hero-provider">By NavigateGov®</p>
+        <p class="hero-provider">By NavigateGov.uk</p>
 
         <p class="hero-description">
             A guided, professional-grade framework that transforms vague concepts into 
@@ -1537,7 +1551,7 @@
     </div>
 
     <div class="legal-footer">
-        © 2025 NavigateGov Ltd. All rights reserved. | Strategic Architect™ is a trademark of NavigateGov®<br>
+        © 2025 NavigateGov Ltd. All rights reserved. | Strategic Architect is a registered trademark of NavigateGov.uk<br>
         <a href="#" onclick="app.showDisclaimer(); return false;">Legal Disclaimer</a> • 
         <a href="#" onclick="app.showPrivacy(); return false;">Privacy Policy</a> • 
         <a href="#" onclick="app.showTerms(); return false;">Terms of Service</a><br>
@@ -1550,7 +1564,7 @@
     <header>
         <div class="header-brand">
             <div class="header-logo">S</div>
-            <div class="header-title">Strategic <span class="accent">Architect</span>™</div>
+            <div class="header-title">Strategic <span class="accent">Architect</span></div>
         </div>
         
         <div class="header-actions">
@@ -1662,7 +1676,7 @@
 
 <script>
 /**
- * STRATEGIC ARCHITECT™ by NavigateGov®
+* STRATEGIC ARCHITECT by NavigateGov.uk
  * Professional Strategic Planning Framework
  * Version 2.0.0
  * 
@@ -2633,7 +2647,7 @@ const app = {
                     <div class="export-title">Strategic Planning Brief</div>
                     <div class="export-meta">
                         Generated ${now} | Session ${this.state.sessionId}<br>
-                        NavigateGov® Strategic Architect™ | Version ${this.version}
+                        NavigateGov.uk Strategic Architect | Version ${this.version}
                     </div>
                 </div>
                 
@@ -2651,7 +2665,7 @@ const app = {
                 
                 <div class="export-disclaimer">
                     <strong>Legal Disclaimer</strong>
-                    This strategic planning brief has been generated using NavigateGov® Strategic Architect™, a professional strategic planning framework. The content reflects information provided during the guided interrogation process.
+                    This strategic planning brief has been generated using NavigateGov.uk Strategic Architect, a professional strategic planning framework. The content reflects information provided during the guided interrogation process.
                     <br><br>
                     <strong>Important Notices:</strong><br>
                     • This document constitutes strategic planning support and does not represent professional advice (legal, financial, or otherwise).<br>
@@ -2663,7 +2677,7 @@ const app = {
                     For further strategic advisory support, please contact NavigateGov Ltd.<br>
                     <br>
                     © ${new Date().getFullYear()} NavigateGov Ltd. All rights reserved.<br>
-                    Strategic Architect™ and NavigateGov® are registered trademarks of NavigateGov Ltd.
+                    Strategic Architect and NavigateGov.uk are registered trademarks of NavigateGov Ltd.
                 </div>
             </div>
         `;
@@ -2899,15 +2913,15 @@ const app = {
     },
 
     showDisclaimer: function() {
-        alert('LEGAL DISCLAIMER\n\nStrategic Architect™ by NavigateGov®\n\nThis strategic planning framework provides decision-support intelligence through structured interrogation methodology. All outputs constitute advisory information only and do not represent professional advice (legal, financial, policy, or otherwise).\n\nUsers retain full responsibility for all strategic decisions, implementations, and outcomes. NavigateGov Ltd accepts no liability for consequences arising from decisions based on system-generated outputs.\n\nAll intellectual property rights in the framework, methodology, and software remain with NavigateGov Ltd. Unauthorized reproduction or commercial use is prohibited.\n\n© 2025 NavigateGov Ltd. All rights reserved.');
+        alert('LEGAL DISCLAIMER\n\nStrategic Architect by NavigateGov.uk\n\nThis strategic planning framework provides decision-support intelligence through structured interrogation methodology. All outputs constitute advisory information only and do not represent professional advice (legal, financial, policy, or otherwise).\n\nUsers retain full responsibility for all strategic decisions, implementations, and outcomes. NavigateGov Ltd accepts no liability for consequences arising from decisions based on system-generated outputs.\n\nAll intellectual property rights in the framework, methodology, and software remain with NavigateGov Ltd. Unauthorized reproduction or commercial use is prohibited.\n\n© 2025 NavigateGov Ltd. All rights reserved.');
     },
 
     showPrivacy: function() {
-        alert('PRIVACY POLICY\n\nNavigateGov® Strategic Architect™\n\nData Collection: Session data is stored locally in your browser. No information is transmitted to external servers without your explicit consent.\n\nData Usage: Collected information is used solely for generating your strategic brief and improving the framework.\n\nData Retention: You can clear all saved data at any time through your browser settings.\n\nFor full privacy policy, visit: navigategov.uk/privacy');
+        alert('PRIVACY POLICY\n\nNavigateGov.uk Strategic Architect\n\nData Collection: Session data is stored locally in your browser. No information is transmitted to external servers without your explicit consent.\n\nData Usage: Collected information is used solely for generating your strategic brief and improving the framework.\n\nData Retention: You can clear all saved data at any time through your browser settings.\n\nFor full privacy policy, visit: navigategov.uk/privacy');
     },
 
     showTerms: function() {
-        alert('TERMS OF SERVICE\n\nNavigateGov® Strategic Architect™\n\nBy using this framework, you agree to:\n• Use the system for legitimate strategic planning purposes only\n• Not attempt to reverse-engineer or replicate the methodology\n• Accept sole responsibility for decisions based on generated outputs\n• Respect intellectual property rights\n\nFor full terms, visit: navigategov.uk/terms');
+        alert('TERMS OF SERVICE\n\nNavigateGov.uk Strategic Architect\n\nBy using this framework, you agree to:\n• Use the system for legitimate strategic planning purposes only\n• Not attempt to reverse-engineer or replicate the methodology\n• Accept sole responsibility for decisions based on generated outputs\n• Respect intellectual property rights\n\nFor full terms, visit: navigategov.uk/terms');
     },
 
     // UTILITIES
