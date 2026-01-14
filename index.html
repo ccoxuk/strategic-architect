@@ -1,0 +1,2947 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: deep-purple; icon-glyph: magic;
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Professional strategic planning framework by NavigateGov - Transform ideas into actionable strategic plans">
+    <meta name="author" content="NavigateGov Ltd">
+    <title>Strategic Architect™ by NavigateGov® | Professional Planning Framework</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Core Palette - Professional Grade */
+            --bg-deep: #0a0a0a;
+            --bg-panel: #121212;
+            --bg-elevated: #1a1a1a;
+            --bg-card: #1e1e1e;
+            --border-subtle: #2a2a2a;
+            --border-strong: #404040;
+            
+            /* Text Hierarchy */
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-tertiary: #808080;
+            --text-disabled: #4d4d4d;
+            
+            /* Brand Colours */
+            --gold-primary: #d4af37;
+            --gold-hover: #e5c158;
+            --gold-dark: #b89530;
+            --accent-blue: #0066cc;
+            --accent-green: #10b981;
+            --accent-red: #dc2626;
+            --accent-amber: #f59e0b;
+            
+            /* Semantic Colours */
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #dc2626;
+            --info: #3b82f6;
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
+            
+            /* Spacing System */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Z-Index Scale */
+            --z-base: 1;
+            --z-dropdown: 1000;
+            --z-sticky: 1020;
+            --z-fixed: 1030;
+            --z-modal-backdrop: 1040;
+            --z-modal: 1050;
+            --z-popover: 1060;
+            --z-tooltip: 1070;
+        }
+
+        /* CSS Reset & Base Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Focus Styles */
+        *:focus-visible {
+            outline: 2px solid var(--gold-primary);
+            outline-offset: 2px;
+        }
+
+        /* Utility Classes */
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .slide-up { animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        /* Loading States */
+        .skeleton {
+            background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%);
+            background-size: 2000px 100%;
+            animation: shimmer 2s infinite;
+            border-radius: var(--radius-md);
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            z-index: var(--z-tooltip);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            pointer-events: none;
+        }
+
+        .toast {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-strong);
+            border-left: 4px solid var(--gold-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-lg);
+            min-width: 300px;
+            max-width: 500px;
+            pointer-events: all;
+            animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .toast.success { border-left-color: var(--success); }
+        .toast.error { border-left-color: var(--error); }
+        .toast.warning { border-left-color: var(--warning); }
+        .toast.info { border-left-color: var(--info); }
+
+        .toast-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            font-size: 14px;
+        }
+
+        .toast-message {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* HOME VIEW - Landing Page */
+        #view-home {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-lg);
+            text-align: center;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, var(--bg-deep) 50%);
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--bg-deep);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title .accent {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
+        }
+
+        .hero-provider {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-2xl);
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2xl);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: all var(--transition-base);
+        }
+
+        .feature-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            color: var(--bg-deep);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-strong);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold-primary);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .keyboard-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-top: var(--space-sm);
+        }
+
+        .kbd {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 2px 6px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Legal Footer */
+        .legal-footer {
+            position: absolute;
+            bottom: var(--space-md);
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-tertiary);
+            padding: 0 var(--space-lg);
+            line-height: 1.5;
+        }
+
+        .legal-footer a {
+            color: var(--gold-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .legal-footer a:hover {
+            color: var(--gold-hover);
+            text-decoration: underline;
+        }
+
+        /* APP SHELL */
+        header {
+            height: 64px;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-lg);
+            flex-shrink: 0;
+            z-index: var(--z-sticky);
+            position: sticky;
+            top: 0;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .header-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--bg-deep);
+        }
+
+        .header-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .header-title .accent {
+            color: var(--gold-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .progress-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            padding: var(--space-sm) var(--space-md);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--gold-primary);
+            font-weight: 600;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 16px;
+        }
+
+        .btn-icon:hover {
+            background: var(--bg-elevated);
+            border-color: var(--gold-primary);
+            color: var(--text-primary);
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            height: 3px;
+            background: var(--bg-elevated);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-hover), var(--success));
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: progressShimmer 2s infinite;
+        }
+
+        @keyframes progressShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Main Workspace */
+        .workspace {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #conversation-container {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: var(--space-2xl) var(--space-lg);
+            scroll-behavior: smooth;
+            /* Custom scrollbar */
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-strong) var(--bg-deep);
+        }
+
+        #conversation-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #conversation-container::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+
+        #conversation-container::-webkit-scrollbar-thumb {
+            background: var(--border-strong);
+            border-radius: var(--radius-full);
+        }
+
+        #conversation-container::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-primary);
+        }
+
+        /* Message Bubbles */
+        .msg {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: var(--space-2xl);
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: min(700px, 90%);
+        }
+
+        .msg.bot {
+            align-self: flex-start;
+        }
+
+        .msg.user {
+            align-self: flex-end;
+            align-items: flex-end;
+        }
+
+        .bubble {
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius-xl);
+            font-size: 15px;
+            line-height: 1.7;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .bot .bubble {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(30, 30, 30, 0.95));
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--gold-primary);
+            color: var(--text-primary);
+        }
+
+        .user .bubble {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--text-primary);
+            text-align: right;
+        }
+
+        .msg-meta {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            font-family: var(--font-mono);
+            margin-top: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .msg-timestamp {
+            opacity: 0.5;
+        }
+
+        /* Help & Info Bubbles */
+        .help-tip {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-left: 3px solid var(--info);
+            padding: var(--space-md) var(--space-lg);
+            margin-top: var(--space-md);
+            border-radius: var(--radius-lg);
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .help-tip strong {
+            color: var(--info);
+            font-weight: 600;
+        }
+
+        .insight-tip {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-left: 3px solid var(--success);
+            padding: var(--space-md) var(--space-lg);
+            margin-top: var(--space-md);
+            border-radius: var(--radius-lg);
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .insight-tip strong {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Interactive Elements */
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .choice-btn {
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choice-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(212, 175, 55, 0.1));
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .choice-btn:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .choice-btn:hover::before {
+            opacity: 1;
+        }
+
+        .choice-btn.selected {
+            border-color: var(--gold-primary);
+            background: rgba(212, 175, 55, 0.15);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+
+        .choice-btn:active {
+            transform: translateY(0);
+        }
+
+        .choice-icon {
+            font-size: 28px;
+            filter: grayscale(1);
+            transition: filter var(--transition-base);
+        }
+
+        .choice-btn:hover .choice-icon,
+        .choice-btn.selected .choice-icon {
+            filter: grayscale(0);
+        }
+
+        .choice-label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .choice-desc {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: var(--space-xs);
+            font-weight: 400;
+        }
+
+        /* Binary Choice */
+        .binary-choice {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .binary-btn {
+            flex: 1;
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .binary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .binary-btn.yes:hover {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .binary-btn.no:hover {
+            border-color: var(--error);
+            background: rgba(220, 38, 38, 0.1);
+        }
+
+        /* Scale Slider */
+        .scale-container {
+            margin-top: var(--space-lg);
+            padding: var(--space-xl);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .scale-slider {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-full);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .scale-slider::-webkit-slider-track {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-full);
+        }
+
+        .scale-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-fast);
+        }
+
+        .scale-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .scale-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .scale-value {
+            text-align: center;
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--gold-primary);
+            font-family: var(--font-mono);
+        }
+
+        /* Text Input Inline */
+        .inline-input {
+            width: 100%;
+            background: var(--bg-deep);
+            border: 2px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: var(--space-lg);
+            font-size: 15px;
+            border-radius: var(--radius-lg);
+            outline: none;
+            font-family: var(--font-sans);
+            margin-top: var(--space-lg);
+            transition: all var(--transition-base);
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .inline-input:focus {
+            border-color: var(--gold-primary);
+            background: var(--bg-elevated);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .inline-input::placeholder {
+            color: var(--text-disabled);
+        }
+
+        /* Template Suggestions */
+        .template-suggestions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+        }
+
+        .template-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 13px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .template-btn:hover {
+            border-color: var(--gold-primary);
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            transform: translateX(4px);
+        }
+
+        .template-icon {
+            color: var(--gold-primary);
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Input Deck */
+        .input-deck {
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 1px solid var(--border-subtle);
+            padding: var(--space-lg);
+            display: flex;
+            gap: var(--space-md);
+            z-index: var(--z-sticky);
+            padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom));
+        }
+
+        .main-input {
+            flex: 1;
+            background: var(--bg-deep);
+            border: 2px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: var(--space-md) var(--space-lg);
+            font-size: 15px;
+            border-radius: var(--radius-lg);
+            outline: none;
+            font-family: var(--font-sans);
+            transition: all var(--transition-base);
+            resize: none;
+            min-height: 48px;
+            max-height: 120px;
+        }
+
+        .main-input:focus {
+            border-color: var(--gold-primary);
+            background: var(--bg-elevated);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            color: var(--bg-deep);
+            border: none;
+            padding: 0 var(--space-xl);
+            font-weight: 700;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 12px;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            letter-spacing: 0.05em;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+            min-width: 100px;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .send-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Floating Actions */
+        .floating-actions {
+            position: fixed;
+            bottom: calc(var(--space-2xl) + 80px);
+            right: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            z-index: var(--z-fixed);
+        }
+
+        .float-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            border: none;
+            color: var(--bg-deep);
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .float-btn:active {
+            transform: scale(1.05);
+        }
+
+        .float-btn.secondary {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border-strong);
+        }
+
+        .float-btn.secondary:hover {
+            background: var(--bg-card);
+            border-color: var(--gold-primary);
+        }
+
+        .float-btn-tooltip {
+            position: absolute;
+            right: calc(100% + var(--space-md));
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-strong);
+            color: var(--text-primary);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-fast);
+            box-shadow: var(--shadow-md);
+        }
+
+        .float-btn:hover .float-btn-tooltip {
+            opacity: 1;
+        }
+
+        /* Summary Panel */
+        .summary-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            max-width: 90vw;
+            height: 100vh;
+            background: var(--bg-panel);
+            border-left: 1px solid var(--border-subtle);
+            z-index: var(--z-modal);
+            transition: right var(--transition-slow);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .summary-panel.open {
+            right: 0;
+        }
+
+        .summary-header {
+            padding: var(--space-xl);
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            background: var(--bg-panel);
+            z-index: 10;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .summary-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .summary-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .summary-close {
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+
+        .summary-close:hover {
+            background: var(--bg-elevated);
+            border-color: var(--gold-primary);
+            color: var(--text-primary);
+        }
+
+        .summary-content {
+            flex: 1;
+            padding: var(--space-xl);
+        }
+
+        .summary-section {
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .summary-section:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-size: 11px;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+            margin-bottom: var(--space-md);
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+
+        .summary-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+
+        .summary-text.empty {
+            color: var(--text-disabled);
+            font-style: italic;
+        }
+
+        .summary-actions {
+            padding: var(--space-xl);
+            border-top: 1px solid var(--border-subtle);
+            background: var(--bg-panel);
+            position: sticky;
+            bottom: 0;
+        }
+
+        /* Export Panel */
+        #export-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: var(--z-modal);
+            overflow-y: auto;
+            padding: var(--space-2xl);
+        }
+
+        .export-document {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: var(--space-3xl);
+            color: #000000;
+            font-family: Georgia, serif;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .export-header {
+            border-bottom: 3px solid #000000;
+            padding-bottom: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .export-title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: var(--space-md);
+            font-family: var(--font-display);
+        }
+
+        .export-meta {
+            font-size: 12px;
+            color: #666666;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .export-section {
+            margin-bottom: var(--space-2xl);
+            page-break-inside: avoid;
+        }
+
+        .export-label {
+            font-size: 11px;
+            font-family: sans-serif;
+            font-weight: 700;
+            color: #999999;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: var(--space-sm);
+            letter-spacing: 0.05em;
+        }
+
+        .export-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #111111;
+        }
+
+        .export-actions {
+            position: sticky;
+            top: var(--space-lg);
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
+            z-index: 10;
+        }
+
+        .export-btn {
+            flex: 1;
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: var(--space-lg);
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            font-size: 13px;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-base);
+        }
+
+        .export-btn:hover {
+            background: #1a1a1a;
+        }
+
+        .export-btn.primary {
+            background: var(--gold-primary);
+            color: #000000;
+        }
+
+        .export-btn.primary:hover {
+            background: var(--gold-hover);
+        }
+
+        .export-disclaimer {
+            margin-top: var(--space-3xl);
+            padding-top: var(--space-xl);
+            border-top: 2px solid #e5e5e5;
+            font-size: 10px;
+            color: #666666;
+            line-height: 1.6;
+            font-family: sans-serif;
+        }
+
+        .export-disclaimer strong {
+            color: #000000;
+            display: block;
+            margin-bottom: var(--space-sm);
+            font-size: 11px;
+        }
+
+        /* Keyboard Shortcuts Panel */
+        .shortcuts-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            max-width: 500px;
+            width: 90%;
+            z-index: var(--z-modal);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .shortcuts-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: calc(var(--z-modal) - 1);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .shortcuts-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--gold-primary);
+        }
+
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .shortcut-item:last-child {
+            border-bottom: none;
+        }
+
+        .shortcut-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .shortcut-keys {
+            display: flex;
+            gap: var(--space-xs);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .choice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .binary-choice {
+                flex-direction: column;
+            }
+
+            .floating-actions {
+                bottom: calc(var(--space-lg) + 80px);
+                right: var(--space-md);
+            }
+
+            .float-btn {
+                width: 48px;
+                height: 48px;
+            }
+
+            header {
+                padding: 0 var(--space-md);
+            }
+
+            #conversation-container {
+                padding: var(--space-lg) var(--space-md);
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .export-document {
+                padding: var(--space-2xl);
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .export-actions,
+            .shortcuts-modal,
+            .shortcuts-backdrop {
+                display: none !important;
+            }
+
+            .export-document {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+
+        /* Accessibility Improvements */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Dark Mode Support (already dark, but prepared for light mode toggle) */
+        @media (prefers-color-scheme: light) {
+            /* Light mode styles would go here if implementing theme toggle */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- HOME VIEW -->
+<div id="view-home">
+    <div class="hero-container">
+        <div class="brand-logo">
+            <div class="logo-icon">S</div>
+        </div>
+
+        <h1 class="hero-title">Strategic <span class="accent">Architect</span>™</h1>
+        <p class="hero-subtitle">Transform Ideas Into Actionable Strategic Plans</p>
+        <p class="hero-provider">By NavigateGov®</p>
+
+        <p class="hero-description">
+            A guided, professional-grade framework that transforms vague concepts into 
+            comprehensive strategic plans through intelligent questioning and structured thinking.
+        </p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">Guided Process</div>
+                <div class="feature-desc">One question at a time</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Smart Scaffolding</div>
+                <div class="feature-desc">Templates and examples</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Professional Output</div>
+                <div class="feature-desc">Export-ready documents</div>
+            </div>
+        </div>
+
+        <div class="cta-group">
+            <button class="btn btn-primary" onclick="app.start()">
+                <span>Begin Strategic Planning</span>
+                <span>→</span>
+            </button>
+            <button class="btn btn-secondary" onclick="app.showDemo()">
+                <span>View Demo</span>
+            </button>
+        </div>
+
+        <div class="keyboard-hint">
+            <span>Press</span>
+            <kbd class="kbd">Enter</kbd>
+            <span>to continue</span>
+            <span style="margin-left: 12px;">•</span>
+            <kbd class="kbd">?</kbd>
+            <span>for shortcuts</span>
+        </div>
+    </div>
+
+    <div class="legal-footer">
+        © 2025 NavigateGov Ltd. All rights reserved. | Strategic Architect™ is a trademark of NavigateGov®<br>
+        <a href="#" onclick="app.showDisclaimer(); return false;">Legal Disclaimer</a> • 
+        <a href="#" onclick="app.showPrivacy(); return false;">Privacy Policy</a> • 
+        <a href="#" onclick="app.showTerms(); return false;">Terms of Service</a><br>
+        This tool provides strategic planning support and does not constitute professional advice.
+    </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app-shell" class="hidden" style="height:100%; display:flex; flex-direction:column;">
+    <header>
+        <div class="header-brand">
+            <div class="header-logo">S</div>
+            <div class="header-title">Strategic <span class="accent">Architect</span>™</div>
+        </div>
+        
+        <div class="header-actions">
+            <div class="progress-badge" id="progress-text">
+                <span>Question 1 of 25</span>
+            </div>
+            <button class="btn-icon" onclick="app.toggleSummary()" title="View Progress" aria-label="View Progress">
+                <span>📋</span>
+            </button>
+            <button class="btn-icon" onclick="app.showSettings()" title="Settings" aria-label="Settings">
+                <span>⚙️</span>
+            </button>
+        </div>
+    </header>
+    
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progress-fill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <div class="workspace">
+        <div id="conversation-container" role="main" aria-live="polite"></div>
+    </div>
+
+    <div class="input-deck">
+        <textarea 
+            class="main-input" 
+            id="main-input" 
+            placeholder="Type your answer here..." 
+            autocomplete="off"
+            rows="1"
+            aria-label="Answer input"
+        ></textarea>
+        <button class="send-btn" id="send-btn" onclick="app.submitAnswer()" aria-label="Send answer">
+            SEND
+        </button>
+    </div>
+</div>
+
+<!-- FLOATING ACTIONS -->
+<div class="floating-actions hidden" id="floating-actions">
+    <button class="float-btn secondary" onclick="app.showHelp()" title="Get Help" aria-label="Get Help">
+        <span>?</span>
+        <span class="float-btn-tooltip">Help</span>
+    </button>
+    <button class="float-btn secondary" onclick="app.skipQuestion()" title="Skip Question" aria-label="Skip Question">
+        <span>→</span>
+        <span class="float-btn-tooltip">Skip</span>
+    </button>
+    <button class="float-btn" onclick="app.toggleSummary()" title="View Summary" aria-label="View Summary">
+        <span>📋</span>
+        <span class="float-btn-tooltip">Summary</span>
+    </button>
+    <button class="float-btn secondary" onclick="app.saveProgress()" title="Save Progress" aria-label="Save Progress">
+        <span>💾</span>
+        <span class="float-btn-tooltip">Save</span>
+    </button>
+</div>
+
+<!-- SUMMARY PANEL -->
+<div class="summary-panel" id="summary-panel" role="complementary" aria-label="Progress Summary">
+    <div class="summary-header">
+        <h2 class="summary-title">Your Progress</h2>
+        <p class="summary-subtitle">Review your strategic framework</p>
+        <button class="summary-close" onclick="app.toggleSummary()" aria-label="Close Summary">×</button>
+    </div>
+    <div class="summary-content" id="summary-content"></div>
+    <div class="summary-actions">
+        <button class="btn btn-primary" onclick="app.showExport()" style="width:100%;">
+            Generate Strategic Brief
+        </button>
+        <button class="btn btn-secondary" onclick="app.emailBrief()" style="width:100%; margin-top: 12px;">
+            Email to Myself
+        </button>
+    </div>
+</div>
+
+<!-- EXPORT PANEL -->
+<div id="export-panel" role="dialog" aria-label="Export Document"></div>
+
+<!-- KEYBOARD SHORTCUTS -->
+<div class="shortcuts-backdrop" id="shortcuts-backdrop" onclick="app.hideShortcuts()"></div>
+<div class="shortcuts-modal" id="shortcuts-modal" role="dialog" aria-labelledby="shortcuts-title">
+    <h3 class="shortcuts-title" id="shortcuts-title">Keyboard Shortcuts</h3>
+    <div class="shortcut-item">
+        <span class="shortcut-desc">Send answer</span>
+        <div class="shortcut-keys"><kbd class="kbd">Enter</kbd></div>
+    </div>
+    <div class="shortcut-item">
+        <span class="shortcut-desc">New line in answer</span>
+        <div class="shortcut-keys"><kbd class="kbd">Shift</kbd> + <kbd class="kbd">Enter</kbd></div>
+    </div>
+    <div class="shortcut-item">
+        <span class="shortcut-desc">Skip question</span>
+        <div class="shortcut-keys"><kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">→</kbd></div>
+    </div>
+    <div class="shortcut-item">
+        <span class="shortcut-desc">Show help</span>
+        <div class="shortcut-keys"><kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">H</kbd></div>
+    </div>
+    <div class="shortcut-item">
+        <span class="shortcut-desc">View summary</span>
+        <div class="shortcut-keys"><kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">S</kbd></div>
+    </div>
+    <div class="shortcut-item">
+        <span class="shortcut-desc">Show shortcuts</span>
+        <div class="shortcut-keys"><kbd class="kbd">?</kbd></div>
+    </div>
+</div>
+
+<script>
+/**
+ * STRATEGIC ARCHITECT™ by NavigateGov®
+ * Professional Strategic Planning Framework
+ * Version 2.0.0
+ * 
+ * Copyright © 2025 NavigateGov Ltd. All rights reserved.
+ * 
+ * This software and its documentation are proprietary to NavigateGov Ltd.
+ * Unauthorized copying, distribution, or use is strictly prohibited.
+ */
+
+const app = {
+    version: '2.0.0',
+    
+    state: {
+        currentQuestion: 0,
+        answers: {},
+        questionFlow: [],
+        userData: {
+            vision: null,
+            mission: null,
+            problem: null,
+            solution: null,
+            audience: null,
+            timeframe: null,
+            aims: [],
+            objectives: [],
+            kpis: [],
+            risks: [],
+            stakeholders: [],
+            resources: null,
+            successCriteria: null,
+            sessionId: null,
+            startTime: null,
+            lastSaved: null
+        },
+        awaitingInteraction: false,
+        currentQuestionType: null,
+        autoSaveEnabled: true
+    },
+
+    // QUESTION BANK
+    questions: [
+        {
+            id: 'initial_idea',
+            text: "Let's start with the essence of your idea. In one simple sentence, what are you trying to create or achieve?",
+            type: 'text',
+            help: "Don't overthink this. Just describe it as you would to a colleague. Examples: 'A platform connecting freelancers with local businesses' or 'A sustainability initiative for office buildings'",
+            store: 'initial_concept',
+            category: 'foundation',
+            weight: 10
+        },
+        {
+            id: 'idea_type',
+            text: "What best describes what you're building?",
+            type: 'choice',
+            choices: [
+                { value: 'product', label: 'A Product or Service', icon: '📦', desc: 'Something people will use or buy' },
+                { value: 'organisation', label: 'An Organisation', icon: '🏢', desc: 'Company, charity, or initiative' },
+                { value: 'campaign', label: 'A Campaign or Movement', icon: '📣', desc: 'To influence or change behaviour' },
+                { value: 'policy', label: 'A Policy or Programme', icon: '📋', desc: 'Government or institutional' },
+                { value: 'hybrid', label: 'Combination', icon: '🔀', desc: 'Multiple elements' }
+            ],
+            store: 'idea_type',
+            category: 'foundation',
+            weight: 8
+        },
+        {
+            id: 'problem_exists',
+            text: "Does this address a specific problem that frustrates people today?",
+            type: 'binary',
+            store: 'has_problem',
+            category: 'foundation',
+            weight: 5,
+            branches: {
+                yes: 'problem_description',
+                no: 'opportunity_description'
+            }
+        },
+        {
+            id: 'problem_description',
+            text: "Describe the problem. What specifically goes wrong for people right now?",
+            type: 'text',
+            help: "Be concrete. Think about: What fails? What wastes time or money? What causes frustration? Example: 'Small charities waste 20 hours monthly on manual donor tracking' or 'Citizens can't easily understand planning applications in their area'",
+            store: 'problem',
+            category: 'foundation',
+            weight: 10,
+            templates: [
+                "People currently struggle to...",
+                "The existing process fails because...",
+                "Stakeholders waste significant time/resources on...",
+                "Current solutions don't address..."
+            ]
+        },
+        {
+            id: 'opportunity_description',
+            text: "What opportunity have you identified? What could work better?",
+            type: 'text',
+            help: "Even without a painful problem, you may see potential for improvement or innovation. What gap exists? What could be more efficient or effective?",
+            store: 'opportunity',
+            category: 'foundation',
+            weight: 10
+        },
+        {
+            id: 'solution_brief',
+            text: "How does your approach solve this? In plain language, what do you do?",
+            type: 'text',
+            help: "Avoid jargon. Focus on the mechanism and outcome. Example: 'We provide automated donor tracking software designed specifically for charities under £500k turnover' or 'We create plain-language summaries of planning applications with community impact analysis'",
+            store: 'solution',
+            category: 'foundation',
+            weight: 10,
+            templates: [
+                "We provide [tool/service] that enables [stakeholder] to [outcome]...",
+                "We've built a [mechanism] that [benefit]...",
+                "We connect [group A] with [group B] to achieve...",
+                "We simplify [process] by..."
+            ]
+        },
+        {
+            id: 'audience_primary',
+            text: "Who is your primary stakeholder or beneficiary?",
+            type: 'choice',
+            choices: [
+                { value: 'citizens', label: 'Citizens/Public', icon: '👥', desc: 'General population' },
+                { value: 'businesses', label: 'Businesses/Organisations', icon: '🏢', desc: 'Commercial or third sector' },
+                { value: 'government', label: 'Government/Public Sector', icon: '🏛️', desc: 'Institutional' },
+                { value: 'specific', label: 'Specific Group', icon: '🎯', desc: 'Defined demographic' },
+                { value: 'multiple', label: 'Multiple Stakeholders', icon: '🔄', desc: 'Complex ecosystem' }
+            ],
+            store: 'audience_type',
+            category: 'audience',
+            weight: 8
+        },
+        {
+            id: 'audience_description',
+            text: "Describe your target audience in more detail. What defines them?",
+            type: 'text',
+            help: "Think about: Their role, their challenges, their context, their resources. Example: 'Local councillors managing community consultations' or 'SME exporters navigating post-Brexit regulations' or 'First-time homebuyers aged 25-35 in urban areas'",
+            store: 'audience',
+            category: 'audience',
+            weight: 10
+        },
+        {
+            id: 'value_proposition',
+            text: "What's the core value you deliver to them? Why should they engage?",
+            type: 'text',
+            help: "Focus on tangible outcomes, not features. Think: Time saved, money saved, better decisions, reduced risk, increased impact. Example: 'Reduce consultation admin time by 70%' or 'Eliminate customs delays through automated compliance checking'",
+            store: 'value_prop',
+            category: 'audience',
+            weight: 10,
+            templates: [
+                "Save [X amount] of time/money on...",
+                "Make better decisions by...",
+                "Reduce risk of [problem] through...",
+                "Achieve [outcome] without [current barrier]..."
+            ]
+        },
+        {
+            id: 'vision_timeframe',
+            text: "What's your strategic time horizon for this initiative?",
+            type: 'choice',
+            choices: [
+                { value: '1yr', label: '1 Year', icon: '🌱', desc: 'Short-term project' },
+                { value: '3yr', label: '3 Years', icon: '🌿', desc: 'Medium-term initiative' },
+                { value: '5yr', label: '5 Years', icon: '🌳', desc: 'Long-term programme' },
+                { value: '10yr', label: '10+ Years', icon: '🏔️', desc: 'Generational change' }
+            ],
+            store: 'vision_timeframe',
+            category: 'vision',
+            weight: 6
+        },
+        {
+            id: 'vision_statement',
+            text: "At the end of that timeframe, what does success look like? Paint a vivid picture.",
+            type: 'text',
+            help: "Be aspirational but concrete. Avoid vague language. Example: 'Every local authority in England uses our platform for citizen engagement, processing 2M consultations annually' or '50,000 SMEs have successfully navigated international trade regulations using our system'",
+            store: 'vision',
+            category: 'vision',
+            weight: 10,
+            templates: [
+                "[Number] of [stakeholder] have achieved [outcome]...",
+                "[Sector/market] has adopted [change] resulting in...",
+                "We've become the recognised standard for [domain]...",
+                "[Problem] has been eliminated in [context]..."
+            ]
+        },
+        {
+            id: 'mission_statement',
+            text: "What's your day-to-day mission? What do you exist to do?",
+            type: 'text',
+            help: "Your mission is your operational purpose. It's what you actually do, day in, day out. Example: 'To provide accessible, reliable regulatory guidance to UK exporters' or 'To democratise civic participation through technology'",
+            store: 'mission',
+            category: 'vision',
+            weight: 10,
+            templates: [
+                "To enable [stakeholder] to [action] through [mechanism]...",
+                "To make [outcome] accessible to [group] by [method]...",
+                "To eliminate [barrier] for [stakeholder]...",
+                "To transform how [stakeholder] approaches [challenge]..."
+            ]
+        },
+        {
+            id: 'aim_count',
+            text: "How many major strategic aims should we define? (These are the big things you need to achieve)",
+            type: 'choice',
+            choices: [
+                { value: '3', label: '3 Strategic Aims', icon: '●●●', desc: 'Focused approach' },
+                { value: '4', label: '4 Strategic Aims', icon: '●●●●', desc: 'Balanced coverage' },
+                { value: '5', label: '5 Strategic Aims', icon: '●●●●●', desc: 'Comprehensive plan' }
+            ],
+            store: 'aim_count',
+            category: 'aims',
+            weight: 5,
+            dynamic: true
+        },
+        {
+            id: 'risk_execution',
+            text: "On a scale of 1-10, how confident are you in your ability to execute and deliver this?",
+            type: 'scale',
+            min: 1,
+            max: 10,
+            labels: ['Very uncertain', 'Highly confident'],
+            store: 'confidence_execution',
+            category: 'risks',
+            weight: 7
+        },
+        {
+            id: 'risk_market',
+            text: "On a scale of 1-10, how confident are you that your stakeholders will engage and adopt this?",
+            type: 'scale',
+            min: 1,
+            max: 10,
+            labels: ['Very uncertain', 'Highly confident'],
+            store: 'confidence_market',
+            category: 'risks',
+            weight: 7
+        },
+        {
+            id: 'main_concerns',
+            text: "What's your primary concern or risk? What could derail this?",
+            type: 'text',
+            help: "Be honest about vulnerabilities. Common risks: Funding gaps, regulatory barriers, stakeholder resistance, technical complexity, political changes, market competition. Example: 'Department budget cuts could eliminate our funding stream' or 'Data protection regulations may limit our operational model'",
+            store: 'primary_risk',
+            category: 'risks',
+            weight: 10
+        },
+        {
+            id: 'resource_team',
+            text: "Do you need to build a team, or can this be delivered with existing resources initially?",
+            type: 'binary',
+            store: 'needs_team',
+            category: 'resources',
+            weight: 6
+        },
+        {
+            id: 'resource_funding',
+            text: "What's the anticipated funding requirement?",
+            type: 'choice',
+            choices: [
+                { value: 'internal', label: 'Internal Resources', icon: '🏢', desc: 'Existing budgets' },
+                { value: 'small', label: 'Small Grant/Budget', icon: '💷', desc: '£10k-£100k' },
+                { value: 'medium', label: 'Significant Funding', icon: '💰', desc: '£100k-£1M' },
+                { value: 'large', label: 'Major Investment', icon: '🏦', desc: '£1M+' },
+                { value: 'tbd', label: 'To Be Determined', icon: '🤔', desc: 'Needs scoping' }
+            ],
+            store: 'funding_need',
+            category: 'resources',
+            weight: 8
+        },
+        {
+            id: 'first_action',
+            text: "What's the very first concrete action you need to take? Be specific.",
+            type: 'text',
+            help: "Make it actionable and small enough to start immediately. Example: 'Interview 10 target users to validate problem assumption' or 'Draft policy proposal for ministerial review' or 'Build minimum viable prototype for user testing'",
+            store: 'first_step',
+            category: 'tactics',
+            weight: 10,
+            templates: [
+                "Conduct [number] interviews with [stakeholder] to validate...",
+                "Develop initial [deliverable] for [purpose]...",
+                "Secure approval from [authority] to proceed with...",
+                "Complete [research/analysis] on..."
+            ]
+        },
+        {
+            id: 'timeline_start',
+            text: "When can you realistically begin execution?",
+            type: 'choice',
+            choices: [
+                { value: 'immediate', label: 'Immediately', icon: '🚀', desc: 'Ready to start' },
+                { value: 'weeks', label: 'Within Weeks', icon: '📅', desc: '2-4 weeks' },
+                { value: 'months', label: 'Within Months', icon: '🗓️', desc: '1-3 months' },
+                { value: 'quarter', label: 'Next Quarter', icon: '📆', desc: '3-6 months' },
+                { value: 'conditional', label: 'Conditional', icon: '⏳', desc: 'Depends on approval/funding' }
+            ],
+            store: 'timeline_start',
+            category: 'tactics',
+            weight: 6
+        },
+        {
+            id: 'completion',
+            text: "Excellent work. You've completed the strategic interrogation. Your comprehensive brief is ready for generation.",
+            type: 'info',
+            final: true,
+            category: 'completion',
+            weight: 0
+        }
+    ],
+
+    // INITIALIZATION
+    init: function() {
+        this.state.sessionId = this.generateSessionId();
+        this.state.startTime = new Date();
+        this.setupEventListeners();
+        this.loadProgress();
+        this.logAnalytics('app_init', { version: this.version });
+    },
+
+    generateSessionId: function() {
+        return 'SA-' + Date.now().toString(36) + '-' + Math.random().toString(36).substr(2, 9);
+    },
+
+    setupEventListeners: function() {
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // ? - Show shortcuts
+            if(e.key === '?' && !this.isTyping()) {
+                e.preventDefault();
+                this.showShortcuts();
+            }
+            
+            // Ctrl+S - Show summary
+            if(e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                this.toggleSummary();
+            }
+            
+            // Ctrl+H - Show help
+            if(e.ctrlKey && e.key === 'h') {
+                e.preventDefault();
+                this.showHelp();
+            }
+            
+            // Ctrl+→ - Skip question
+            if(e.ctrlKey && e.key === 'ArrowRight') {
+                e.preventDefault();
+                this.skipQuestion();
+            }
+            
+            // Enter on home screen
+            if(e.key === 'Enter' && !document.getElementById('view-home').classList.contains('hidden')) {
+                e.preventDefault();
+                this.start();
+            }
+        });
+
+        // Auto-resize textarea
+        const textarea = document.getElementById('main-input');
+        if(textarea) {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            });
+            
+            // Enter to submit (Shift+Enter for new line)
+            textarea.addEventListener('keydown', (e) => {
+                if(e.key === 'Enter' && !e.shiftKey && !textarea.classList.contains('hidden-input')) {
+                    e.preventDefault();
+                    this.submitAnswer();
+                }
+            });
+        }
+
+        // Auto-save
+        if(this.state.autoSaveEnabled) {
+            setInterval(() => this.autoSave(), 30000); // Every 30 seconds
+        }
+    },
+
+    isTyping: function() {
+        const input = document.getElementById('main-input');
+        return input && document.activeElement === input;
+    },
+
+    // CORE FLOW
+    start: function() {
+        document.getElementById('view-home').classList.add('hidden');
+        document.getElementById('app-shell').classList.remove('hidden');
+        document.getElementById('floating-actions').classList.remove('hidden');
+        
+        this.buildQuestionFlow();
+        this.logAnalytics('journey_start');
+        this.showToast('Welcome', 'Strategic planning session initiated', 'info');
+        
+        setTimeout(() => this.askQuestion(), 500);
+    },
+
+    buildQuestionFlow: function() {
+        this.state.questionFlow = this.questions.map(q => q.id);
+    },
+
+    askQuestion: function() {
+        const qId = this.state.questionFlow[this.state.currentQuestion];
+        const q = this.questions.find(qu => qu.id === qId);
+        
+        if(!q) {
+            this.completeJourney();
+            return;
+        }
+
+        this.state.currentQuestionType = q.type;
+        this.state.awaitingInteraction = true;
+        
+        this.updateProgress();
+        this.addBotMessage(q.text, q);
+        this.setupQuestionType(q);
+        
+        this.logAnalytics('question_shown', { 
+            questionId: q.id, 
+            questionNumber: this.state.currentQuestion + 1,
+            category: q.category
+        });
+    },
+
+    setupQuestionType: function(q) {
+        const input = document.getElementById('main-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        switch(q.type) {
+            case 'text':
+                input.classList.remove('hidden-input');
+                input.value = '';
+                input.placeholder = "Type your answer...";
+                input.style.height = 'auto';
+                setTimeout(() => input.focus(), 100);
+                sendBtn.disabled = false;
+                sendBtn.innerText = 'SEND';
+                sendBtn.onclick = () => this.submitAnswer();
+                break;
+                
+            case 'binary':
+            case 'choice':
+            case 'scale':
+                input.classList.add('hidden-input');
+                sendBtn.disabled = true;
+                break;
+                
+            case 'info':
+                input.classList.add('hidden-input');
+                if(q.autoProgress) {
+                    setTimeout(() => this.nextQuestion(), 2000);
+                } else if(q.final) {
+                    sendBtn.disabled = false;
+                    sendBtn.innerText = 'VIEW BRIEF';
+                    sendBtn.onclick = () => this.showExport();
+                }
+                break;
+        }
+    },
+
+    addBotMessage: function(text, question) {
+        const container = document.getElementById('conversation-container');
+        const timestamp = this.formatTime(new Date());
+        
+        const msg = document.createElement('div');
+        msg.className = 'msg bot fade-in';
+        msg.setAttribute('role', 'article');
+        
+        msg.innerHTML = `
+            <div class="bubble">${text}</div>
+            <div class="msg-meta">
+                <span>Strategic Architect</span>
+                <span class="msg-timestamp">${timestamp}</span>
+            </div>
+        `;
+        
+        container.appendChild(msg);
+        
+        if(question.help) {
+            setTimeout(() => {
+                const help = document.createElement('div');
+                help.className = 'msg bot fade-in';
+                help.innerHTML = `
+                    <div class="bubble">
+                        <div class="help-tip">
+                            <strong>Guidance:</strong> ${question.help}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(help);
+                this.scrollToBottom();
+            }, 800);
+        }
+        
+        setTimeout(() => {
+            this.addInteractionElements(question);
+        }, question.help ? 1400 : 700);
+        
+        this.scrollToBottom();
+    },
+
+    addInteractionElements: function(q) {
+        const container = document.getElementById('conversation-container');
+        const msg = document.createElement('div');
+        msg.className = 'msg bot fade-in';
+        
+        let interactionHTML = '<div class="bubble">';
+        
+        switch(q.type) {
+            case 'binary':
+                interactionHTML += `
+                    <div class="binary-choice">
+                        <button class="binary-btn yes" onclick="app.handleBinary(true)" aria-label="Yes">YES</button>
+                        <button class="binary-btn no" onclick="app.handleBinary(false)" aria-label="No">NO</button>
+                    </div>
+                `;
+                break;
+                
+            case 'choice':
+                interactionHTML += '<div class="choice-grid">';
+                q.choices.forEach((choice, idx) => {
+                    interactionHTML += `
+                        <button class="choice-btn" 
+                                onclick="app.handleChoice('${choice.value}', '${choice.label.replace(/'/g, "\\'")}')"
+                                aria-label="${choice.label}">
+                            <div class="choice-icon" aria-hidden="true">${choice.icon}</div>
+                            <div class="choice-label">${choice.label}</div>
+                            ${choice.desc ? `<div class="choice-desc">${choice.desc}</div>` : ''}
+                        </button>
+                    `;
+                });
+                interactionHTML += '</div>';
+                break;
+                
+            case 'scale':
+                interactionHTML += `
+                    <div class="scale-container" role="group" aria-labelledby="scale-description">
+                        <div class="scale-labels" id="scale-description">
+                            <span>${q.labels[0]}</span>
+                            <span>${q.labels[1]}</span>
+                        </div>
+                        <input type="range" 
+                               class="scale-slider" 
+                               min="${q.min}" 
+                               max="${q.max}" 
+                               value="5" 
+                               oninput="app.updateScaleValue(this.value)"
+                               aria-label="Confidence scale"
+                               aria-valuemin="${q.min}"
+                               aria-valuemax="${q.max}"
+                               aria-valuenow="5">
+                        <div class="scale-value" id="scale-value" aria-live="polite">5</div>
+                        <button class="btn btn-primary" onclick="app.handleScale()" style="width:100%;">
+                            Confirm Selection
+                        </button>
+                    </div>
+                `;
+                break;
+                
+            case 'text':
+                if(q.templates) {
+                    interactionHTML += '<div class="template-suggestions">';
+                    interactionHTML += '<div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 8px; font-weight: 600;">Suggested structures:</div>';
+                    q.templates.forEach(template => {
+                        interactionHTML += `
+                            <button class="template-btn" onclick="app.useTemplate(\`${template.replace(/`/g, '\\`')}\`)">
+                                <span class="template-icon">💡</span>
+                                <span>${template}</span>
+                            </button>
+                        `;
+                    });
+                    interactionHTML += '</div>';
+                }
+                break;
+        }
+        
+        interactionHTML += '</div>';
+        msg.innerHTML = interactionHTML;
+        container.appendChild(msg);
+        this.scrollToBottom();
+    },
+
+    handleBinary: function(value) {
+        if(!this.state.awaitingInteraction) return;
+        
+        const answer = value ? 'Yes' : 'No';
+        this.recordAnswer(answer, value);
+        
+        const qId = this.state.questionFlow[this.state.currentQuestion];
+        const q = this.questions.find(qu => qu.id === qId);
+        
+        if(q.branches) {
+            const nextId = value ? q.branches.yes : q.branches.no;
+            this.insertQuestion(nextId);
+        }
+        
+        this.logAnalytics('answer_submitted', { 
+            questionId: qId, 
+            answerType: 'binary', 
+            value: answer 
+        });
+        
+        this.nextQuestion();
+    },
+
+    handleChoice: function(value, label) {
+        if(!this.state.awaitingInteraction) return;
+        
+        event.target.closest('.choice-btn').classList.add('selected');
+        
+        setTimeout(() => {
+            this.recordAnswer(label, value);
+            
+            const qId = this.state.questionFlow[this.state.currentQuestion];
+            const q = this.questions.find(qu => qu.id === qId);
+            
+            if(q.dynamic) {
+                this.generateDynamicQuestions(q, value);
+            }
+            
+            this.logAnalytics('answer_submitted', { 
+                questionId: qId, 
+                answerType: 'choice', 
+                value: value 
+            });
+            
+            this.nextQuestion();
+        }, 400);
+    },
+
+    handleScale: function() {
+        if(!this.state.awaitingInteraction) return;
+        
+        const value = document.querySelector('.scale-slider').value;
+        const qId = this.state.questionFlow[this.state.currentQuestion];
+        
+        this.recordAnswer(`${value}/10`, parseInt(value));
+        
+        this.logAnalytics('answer_submitted', { 
+            questionId: qId, 
+            answerType: 'scale', 
+            value: value 
+        });
+        
+        this.nextQuestion();
+    },
+
+    useTemplate: function(template) {
+        const input = document.getElementById('main-input');
+        input.value = template;
+        input.style.height = 'auto';
+        input.style.height = input.scrollHeight + 'px';
+        input.focus();
+        
+        // Place cursor at end
+        input.setSelectionRange(input.value.length, input.value.length);
+        
+        this.logAnalytics('template_used', { template: template.substring(0, 50) });
+    },
+
+    updateScaleValue: function(value) {
+        document.getElementById('scale-value').innerText = value;
+    },
+
+    submitAnswer: function() {
+        if(!this.state.awaitingInteraction) return;
+        
+        const input = document.getElementById('main-input');
+        const value = input.value.trim();
+        
+        if(!value || value.length < 3) {
+            this.showToast('Input Required', 'Please provide a more detailed answer', 'warning');
+            return;
+        }
+        
+        const qId = this.state.questionFlow[this.state.currentQuestion];
+        
+        this.recordAnswer(value, value);
+        
+        this.logAnalytics('answer_submitted', { 
+            questionId: qId, 
+            answerType: 'text', 
+            length: value.length 
+        });
+        
+        input.value = '';
+        input.style.height = 'auto';
+        this.nextQuestion();
+    },
+
+    recordAnswer: function(displayText, value) {
+        const container = document.getElementById('conversation-container');
+        const timestamp = this.formatTime(new Date());
+        
+        const msg = document.createElement('div');
+        msg.className = 'msg user fade-in';
+        msg.setAttribute('role', 'article');
+        msg.innerHTML = `
+            <div class="bubble">${this.sanitizeHTML(displayText)}</div>
+            <div class="msg-meta">
+                <span>You</span>
+                <span class="msg-timestamp">${timestamp}</span>
+            </div>
+        `;
+        container.appendChild(msg);
+        this.scrollToBottom();
+        
+        const qId = this.state.questionFlow[this.state.currentQuestion];
+        const q = this.questions.find(qu => qu.id === qId);
+        
+        this.state.answers[qId] = value;
+        
+        if(q.store) {
+            this.state.userData[q.store] = value;
+        }
+        
+        this.state.awaitingInteraction = false;
+        this.updateSummary();
+        this.autoSave();
+    },
+
+    nextQuestion: function() {
+        this.state.currentQuestion++;
+        
+        if(this.state.currentQuestion >= this.state.questionFlow.length) {
+            this.completeJourney();
+        } else {
+            setTimeout(() => this.askQuestion(), 1200);
+        }
+    },
+
+    insertQuestion: function(qId) {
+        this.state.questionFlow.splice(this.state.currentQuestion + 1, 0, qId);
+    },
+
+    generateDynamicQuestions: function(q, value) {
+        if(q.id === 'aim_count') {
+            const count = parseInt(value);
+            const aimQuestions = [];
+            
+            const aimPrompts = [
+                { suffix: 'Market Positioning', example: 'Establish brand recognition' },
+                { suffix: 'Capability Development', example: 'Build technical infrastructure' },
+                { suffix: 'Stakeholder Engagement', example: 'Secure key partnerships' },
+                { suffix: 'Operational Excellence', example: 'Achieve quality standards' },
+                { suffix: 'Financial Sustainability', example: 'Reach revenue targets' }
+            ];
+            
+            for(let i = 0; i < count; i++) {
+                const promptData = aimPrompts[i] || { suffix: `Aim ${i + 1}`, example: 'Define your goal' };
+                
+                aimQuestions.push({
+                    id: `aim_${i + 1}`,
+                    text: `Strategic Aim ${i + 1} of ${count}: ${promptData.suffix}. What must you achieve?`,
+                    type: 'text',
+                    help: `Define a directional, high-level goal. This isn't yet quantified—that comes in objectives. Example: "${promptData.example}"`,
+                    store: `aim_${i + 1}`,
+                    category: 'aims',
+                    weight: 8,
+                    templates: [
+                        `Establish ${promptData.suffix.toLowerCase()} by...`,
+                        `Develop ${promptData.suffix.toLowerCase()} to achieve...`,
+                        `Secure ${promptData.suffix.toLowerCase()} through...`,
+                        `Build ${promptData.suffix.toLowerCase()} that enables...`
+                    ]
+                });
+            }
+            
+            aimQuestions.forEach((aq, idx) => {
+                this.questions.push(aq);
+                this.state.questionFlow.splice(this.state.currentQuestion + 1 + idx, 0, aq.id);
+            });
+        }
+    },
+
+    skipQuestion: function() {
+        if(!this.state.awaitingInteraction) {
+            this.showToast('Cannot Skip', 'Already answered or no active question', 'warning');
+            return;
+        }
+        
+        const qId = this.state.questionFlow[this.state.currentQuestion];
+        
+        this.logAnalytics('question_skipped', { questionId: qId });
+        
+        this.addBotMessage("Understood. We'll return to this later if needed.");
+        this.state.awaitingInteraction = false;
+        
+        setTimeout(() => this.nextQuestion(), 800);
+    },
+
+    showHelp: function() {
+        const qId = this.state.questionFlow[this.state.currentQuestion];
+        const q = this.questions.find(qu => qu.id === qId);
+        
+        if(q && q.help) {
+            const container = document.getElementById('conversation-container');
+            const help = document.createElement('div');
+            help.className = 'msg bot fade-in';
+            help.innerHTML = `
+                <div class="bubble">
+                    <div class="help-tip">
+                        <strong>Additional Guidance:</strong> ${q.help}
+                    </div>
+                </div>
+            `;
+            container.appendChild(help);
+            this.scrollToBottom();
+        } else {
+            this.showToast('Help', 'If you\'re uncertain, you can skip this question or provide your best answer', 'info');
+        }
+        
+        this.logAnalytics('help_requested', { questionId: qId });
+    },
+
+    toggleSummary: function() {
+        const panel = document.getElementById('summary-panel');
+        panel.classList.toggle('open');
+        
+        if(panel.classList.contains('open')) {
+            this.updateSummary();
+            this.logAnalytics('summary_viewed');
+        }
+    },
+
+    updateSummary: function() {
+        const content = document.getElementById('summary-content');
+        let html = '';
+        
+        const sections = [
+            { key: 'initial_concept', label: 'Core Concept', category: 'foundation' },
+            { key: 'problem', label: 'Problem Statement', category: 'foundation' },
+            { key: 'solution', label: 'Solution Approach', category: 'foundation' },
+            { key: 'audience', label: 'Target Stakeholders', category: 'audience' },
+            { key: 'value_prop', label: 'Value Proposition', category: 'audience' },
+            { key: 'vision', label: 'Vision Statement', category: 'vision' },
+            { key: 'mission', label: 'Mission Statement', category: 'vision' }
+        ];
+        
+        let currentCategory = '';
+        
+        sections.forEach(section => {
+            if(section.category !== currentCategory) {
+                if(currentCategory !== '') {
+                    html += '<div style="height: 24px;"></div>';
+                }
+                currentCategory = section.category;
+                html += `<div style="font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 700;">${currentCategory}</div>`;
+            }
+            
+            const value = this.state.userData[section.key];
+            html += `
+                <div class="summary-section">
+                    <div class="summary-label">${section.label}</div>
+                    <div class="summary-text ${value ? '' : 'empty'}">
+                        ${value || 'Not yet defined'}
+                    </div>
+                </div>
+            `;
+        });
+        
+        // Add dynamic aims
+        const aimsHTML = this.getAimsSummary();
+        if(aimsHTML) {
+            html += '<div style="height: 24px;"></div>';
+            html += '<div style="font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 700;">STRATEGIC AIMS</div>';
+            html += aimsHTML;
+        }
+        
+        content.innerHTML = html;
+    },
+
+    getAimsSummary: function() {
+        const aims = [];
+        for(let i = 1; i <= 5; i++) {
+            const aim = this.state.userData[`aim_${i}`];
+            if(aim) {
+                aims.push(`
+                    <div class="summary-section">
+                        <div class="summary-label">Aim ${i}</div>
+                        <div class="summary-text">${aim}</div>
+                    </div>
+                `);
+            }
+        }
+        return aims.join('');
+    },
+
+    updateProgress: function() {
+        const total = this.state.questionFlow.length;
+        const current = this.state.currentQuestion + 1;
+        const percent = Math.round((current / total) * 100);
+        
+        document.getElementById('progress-text').innerHTML = `<span>Question ${current} of ${total}</span>`;
+        const fill = document.getElementById('progress-fill');
+        fill.style.width = `${percent}%`;
+        fill.setAttribute('aria-valuenow', percent);
+    },
+
+    scrollToBottom: function() {
+        const container = document.getElementById('conversation-container');
+        setTimeout(() => {
+            container.scrollTo({
+                top: container.scrollHeight,
+                behavior: 'smooth'
+            });
+        }, 100);
+    },
+
+    completeJourney: function() {
+        this.logAnalytics('journey_complete', { 
+            duration: Date.now() - this.state.startTime.getTime(),
+            questionsAnswered: Object.keys(this.state.answers).length
+        });
+        
+        this.addBotMessage("🎉 Strategic planning complete. Your comprehensive brief is ready for generation.");
+        
+        setTimeout(() => {
+            const help = document.createElement('div');
+            help.className = 'msg bot fade-in';
+            help.innerHTML = `
+                <div class="bubble">
+                    <div class="insight-tip">
+                        <strong>Next Steps:</strong> Review your summary in the sidebar, then generate your Strategic Brief for export. You can save as PDF, email it, or export to other formats.
+                    </div>
+                </div>
+            `;
+            document.getElementById('conversation-container').appendChild(help);
+            this.scrollToBottom();
+        }, 1500);
+        
+        this.showToast('Complete', 'Strategic brief ready for generation', 'success');
+    },
+
+    // EXPORT & DOCUMENTATION
+    showExport: function() {
+        const panel = document.getElementById('export-panel');
+        panel.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        const doc = this.generateDocument();
+        panel.innerHTML = `
+            <div class="export-actions">
+                <button class="export-btn" onclick="app.closeExport()">← BACK</button>
+                <button class="export-btn" onclick="app.downloadWord()">DOWNLOAD WORD</button>
+                <button class="export-btn primary" onclick="window.print()">SAVE AS PDF</button>
+            </div>
+            ${doc}
+        `;
+        
+        this.logAnalytics('export_viewed');
+    },
+
+    closeExport: function() {
+        document.getElementById('export-panel').style.display = 'none';
+        document.body.style.overflow = '';
+    },
+
+    generateDocument: function() {
+        const d = this.state.userData;
+        const now = new Date().toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+        
+        return `
+            <div class="export-document">
+                <div class="export-header">
+                    <div class="export-title">Strategic Planning Brief</div>
+                    <div class="export-meta">
+                        Generated ${now} | Session ${this.state.sessionId}<br>
+                        NavigateGov® Strategic Architect™ | Version ${this.version}
+                    </div>
+                </div>
+                
+                ${this.generateSection('1.0 Vision Statement', d.vision)}
+                ${this.generateSection('1.1 Mission Statement', d.mission)}
+                ${this.generateSection('2.0 Strategic Proposition', d.solution)}
+                ${this.generateSection('2.1 Problem / Opportunity Context', d.problem || d.opportunity)}
+                ${this.generateSection('3.0 Target Stakeholders', d.audience)}
+                ${this.generateSection('3.1 Core Value Proposition', d.value_prop)}
+                ${this.generateSection('4.0 Strategic Aims', this.formatAims())}
+                ${this.generateSection('5.0 Resource Requirements', this.formatResources())}
+                ${this.generateSection('6.0 Risk Assessment', this.formatRisks())}
+                ${this.generateSection('7.0 Initial Action Plan', this.formatTactics())}
+                ${this.generateSection('8.0 Recommended Next Steps', this.generateNextSteps())}
+                
+                <div class="export-disclaimer">
+                    <strong>Legal Disclaimer</strong>
+                    This strategic planning brief has been generated using NavigateGov® Strategic Architect™, a professional strategic planning framework. The content reflects information provided during the guided interrogation process.
+                    <br><br>
+                    <strong>Important Notices:</strong><br>
+                    • This document constitutes strategic planning support and does not represent professional advice (legal, financial, or otherwise).<br>
+                    • All strategic decisions and implementations remain the sole responsibility of the client/user.<br>
+                    • NavigateGov Ltd accepts no liability for outcomes arising from decisions based on this brief.<br>
+                    • This document is confidential and proprietary to the recipient organisation.<br>
+                    • Reproduction or distribution requires written authorisation from NavigateGov Ltd.<br>
+                    <br>
+                    For further strategic advisory support, please contact NavigateGov Ltd.<br>
+                    <br>
+                    © ${new Date().getFullYear()} NavigateGov Ltd. All rights reserved.<br>
+                    Strategic Architect™ and NavigateGov® are registered trademarks of NavigateGov Ltd.
+                </div>
+            </div>
+        `;
+    },
+
+    generateSection: function(label, content) {
+        return `
+            <div class="export-section">
+                <div class="export-label">${label}</div>
+                <div class="export-text">${content || 'To be developed through further strategic analysis'}</div>
+            </div>
+        `;
+    },
+
+    formatAims: function() {
+        const aims = [];
+        for(let i = 1; i <= 5; i++) {
+            const aim = this.state.userData[`aim_${i}`];
+            if(aim) aims.push(`<strong>${i}.</strong> ${aim}`);
+        }
+        return aims.length ? aims.join('<br><br>') : 'To be defined through stakeholder workshop';
+    },
+
+    formatResources: function() {
+        const parts = [];
+        if(this.state.userData.needs_team !== undefined) {
+            parts.push(`<strong>Team Requirements:</strong> ${this.state.userData.needs_team ? 'Team expansion required' : 'Deliverable with existing resources initially'}`);
+        }
+        if(this.state.userData.funding_need) {
+            const fundingMap = {
+                'internal': 'Internal budget allocation',
+                'small': 'Small grant/budget requirement (£10k-£100k)',
+                'medium': 'Significant funding requirement (£100k-£1M)',
+                'large': 'Major investment requirement (£1M+)',
+                'tbd': 'To be determined through detailed scoping'
+            };
+            parts.push(`<strong>Funding:</strong> ${fundingMap[this.state.userData.funding_need]}`);
+        }
+        return parts.join('<br><br>') || 'To be determined through resource planning exercise';
+    },
+
+    formatRisks: function() {
+        const parts = [];
+        if(this.state.userData.primary_risk) {
+            parts.push(`<strong>Primary Risk:</strong> ${this.state.userData.primary_risk}`);
+        }
+        if(this.state.userData.confidence_execution !== undefined) {
+            parts.push(`<strong>Execution Confidence:</strong> ${this.state.userData.confidence_execution}/10`);
+        }
+        if(this.state.userData.confidence_market !== undefined) {
+            parts.push(`<strong>Market/Stakeholder Confidence:</strong> ${this.state.userData.confidence_market}/10`);
+        }
+        return parts.join('<br><br>') || 'Comprehensive risk assessment recommended';
+    },
+
+    formatTactics: function() {
+        const parts = [];
+        if(this.state.userData.first_step) {
+            parts.push(`<strong>First Action:</strong> ${this.state.userData.first_step}`);
+        }
+        if(this.state.userData.timeline_start) {
+            const timelineMap = {
+                'immediate': 'Immediate commencement',
+                'weeks': 'Commencement within 2-4 weeks',
+                'months': 'Commencement within 1-3 months',
+                'quarter': 'Commencement next quarter (3-6 months)',
+                'conditional': 'Commencement conditional on approvals/funding'
+            };
+            parts.push(`<strong>Timeline:</strong> ${timelineMap[this.state.userData.timeline_start]}`);
+        }
+        return parts.join('<br><br>') || 'Tactical roadmap to be developed';
+    },
+
+    generateNextSteps: function() {
+        return `
+            Based on this strategic brief, we recommend the following progression:<br><br>
+            <strong>1. Validation Phase</strong><br>
+            • Conduct stakeholder consultation to validate core assumptions<br>
+            • Develop detailed business case or policy paper<br>
+            • Secure necessary approvals and authorisations<br><br>
+            <strong>2. Planning Phase</strong><br>
+            • Convert strategic aims into SMART objectives with defined KPIs<br>
+            • Develop detailed implementation roadmap with milestones<br>
+            • Complete comprehensive risk assessment with mitigation strategies<br>
+            • Finalise resource allocation and funding strategy<br><br>
+            <strong>3. Preparation Phase</strong><br>
+            • Assemble core team and define governance structure<br>
+            • Develop detailed project/programme plan<br>
+            • Establish monitoring and evaluation framework<br>
+            • Prepare stakeholder engagement and communication strategy<br><br>
+            <strong>4. Implementation Phase</strong><br>
+            • Execute first tactical actions as defined<br>
+            • Establish regular review cadence<br>
+            • Monitor against KPIs and adjust as needed<br>
+            • Maintain stakeholder communication throughout
+        `;
+    },
+
+    downloadWord: function() {
+        this.showToast('Coming Soon', 'Word export functionality will be available in the next update', 'info');
+        this.logAnalytics('export_word_attempted');
+    },
+
+    emailBrief: function() {
+        const subject = encodeURIComponent('Strategic Planning Brief - ' + this.state.sessionId);
+        const body = encodeURIComponent('Please find attached your Strategic Planning Brief generated using NavigateGov Strategic Architect.\n\nSession ID: ' + this.state.sessionId);
+        window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        
+        this.showToast('Email Client', 'Opening your email client', 'info');
+        this.logAnalytics('export_email');
+    },
+
+    // PERSISTENCE
+    saveProgress: function() {
+        try {
+            const saveData = {
+                version: this.version,
+                timestamp: new Date().toISOString(),
+                sessionId: this.state.sessionId,
+                currentQuestion: this.state.currentQuestion,
+                answers: this.state.answers,
+                userData: this.state.userData,
+                questionFlow: this.state.questionFlow
+            };
+            
+            localStorage.setItem('strategicArchitect_progress', JSON.stringify(saveData));
+            this.state.lastSaved = new Date();
+            
+            this.showToast('Saved', 'Progress saved successfully', 'success');
+            this.logAnalytics('progress_saved');
+        } catch(e) {
+            console.error('Save failed:', e);
+            this.showToast('Save Failed', 'Unable to save progress', 'error');
+        }
+    },
+
+    loadProgress: function() {
+        try {
+            const saved = localStorage.getItem('strategicArchitect_progress');
+            if(!saved) return;
+            
+            const data = JSON.parse(saved);
+            
+            // Version compatibility check
+            if(data.version !== this.version) {
+                console.warn('Version mismatch - migration may be needed');
+            }
+            
+            // Show restore prompt
+            if(confirm('Restore previous session from ' + new Date(data.timestamp).toLocaleString() + '?')) {
+                this.state.currentQuestion = data.currentQuestion;
+                this.state.answers = data.answers;
+                this.state.userData = data.userData;
+                this.state.questionFlow = data.questionFlow;
+                this.state.sessionId = data.sessionId;
+                
+                this.showToast('Restored', 'Previous session restored', 'success');
+                this.logAnalytics('progress_restored');
+            }
+        } catch(e) {
+            console.error('Load failed:', e);
+        }
+    },
+
+    autoSave: function() {
+        if(!this.state.autoSaveEnabled) return;
+        
+        try {
+            const saveData = {
+                version: this.version,
+                timestamp: new Date().toISOString(),
+                sessionId: this.state.sessionId,
+                currentQuestion: this.state.currentQuestion,
+                answers: this.state.answers,
+                userData: this.state.userData,
+                questionFlow: this.state.questionFlow
+            };
+            
+            localStorage.setItem('strategicArchitect_progress', JSON.stringify(saveData));
+            this.state.lastSaved = new Date();
+        } catch(e) {
+            console.error('Auto-save failed:', e);
+        }
+    },
+
+    // UI UTILITIES
+    showToast: function(title, message, type = 'info') {
+        const container = document.getElementById('toast-container');
+        
+        const icons = {
+            success: '✓',
+            error: '✕',
+            warning: '⚠',
+            info: 'ℹ'
+        };
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <div class="toast-icon">${icons[type] || 'ℹ'}</div>
+            <div class="toast-content">
+                <div class="toast-title">${title}</div>
+                <div class="toast-message">${message}</div>
+            </div>
+        `;
+        
+        container.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(100%)';
+            setTimeout(() => toast.remove(), 300);
+        }, 5000);
+    },
+
+    showShortcuts: function() {
+        document.getElementById('shortcuts-backdrop').style.display = 'block';
+        document.getElementById('shortcuts-modal').style.display = 'block';
+        this.logAnalytics('shortcuts_viewed');
+    },
+
+    hideShortcuts: function() {
+        document.getElementById('shortcuts-backdrop').style.display = 'none';
+        document.getElementById('shortcuts-modal').style.display = 'none';
+    },
+
+    showSettings: function() {
+        this.showToast('Settings', 'Settings panel coming soon', 'info');
+    },
+
+    showDemo: function() {
+        this.showToast('Demo', 'Interactive demo coming soon', 'info');
+    },
+
+    showDisclaimer: function() {
+        alert('LEGAL DISCLAIMER\n\nStrategic Architect™ by NavigateGov®\n\nThis strategic planning framework provides decision-support intelligence through structured interrogation methodology. All outputs constitute advisory information only and do not represent professional advice (legal, financial, policy, or otherwise).\n\nUsers retain full responsibility for all strategic decisions, implementations, and outcomes. NavigateGov Ltd accepts no liability for consequences arising from decisions based on system-generated outputs.\n\nAll intellectual property rights in the framework, methodology, and software remain with NavigateGov Ltd. Unauthorized reproduction or commercial use is prohibited.\n\n© 2025 NavigateGov Ltd. All rights reserved.');
+    },
+
+    showPrivacy: function() {
+        alert('PRIVACY POLICY\n\nNavigateGov® Strategic Architect™\n\nData Collection: Session data is stored locally in your browser. No information is transmitted to external servers without your explicit consent.\n\nData Usage: Collected information is used solely for generating your strategic brief and improving the framework.\n\nData Retention: You can clear all saved data at any time through your browser settings.\n\nFor full privacy policy, visit: navigategov.uk/privacy');
+    },
+
+    showTerms: function() {
+        alert('TERMS OF SERVICE\n\nNavigateGov® Strategic Architect™\n\nBy using this framework, you agree to:\n• Use the system for legitimate strategic planning purposes only\n• Not attempt to reverse-engineer or replicate the methodology\n• Accept sole responsibility for decisions based on generated outputs\n• Respect intellectual property rights\n\nFor full terms, visit: navigategov.uk/terms');
+    },
+
+    // UTILITIES
+    formatTime: function(date) {
+        return date.toLocaleTimeString('en-GB', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    },
+
+    sanitizeHTML: function(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    },
+
+    // ANALYTICS
+    logAnalytics: function(event, data = {}) {
+        // In production, this would send to your analytics platform
+        if(window.console && console.log) {
+            console.log('[Analytics]', event, {
+                ...data,
+                sessionId: this.state.sessionId,
+                timestamp: new Date().toISOString()
+            });
+        }
+    }
+};
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    app.init();
+});
+
+// Prevent accidental navigation away
+window.addEventListener('beforeunload', (e) => {
+    if(app.state.currentQuestion > 0 && app.state.currentQuestion < app.state.questionFlow.length - 1) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+    }
+});
+</script>
+</body>
+</html>
